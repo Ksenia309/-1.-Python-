@@ -1,117 +1,70 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module type="WEB_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-</module>
+# Урок 1. Приложение заметки (Python)
+# Информация о проекте
+# Необходимо написать проект, содержащий функционал работы с заметками.
+# Программа должна уметь создавать заметку, сохранять её, читать список заметок,
+# редактировать заметку, удалять заметку.
+#
+# Как сдавать проект
+# Для сдачи проекта необходимо создать отдельный общедоступный репозиторий
+# (Github, GitLab, или Bitbucket).
+# Разработку вести в этом репозитории, использовать пул реквесты на изменения.
+# Программа должна запускаться и работать, ошибок при выполнении программы быть не должно.
+#
+# Критерии оценки
+# Приложение должно запускаться без ошибок, должно уметь сохранять данные в файл,
+# уметь читать данные из файла, делать выборку по дате, выводить на экран выбранную запись,
+# выводить на экран весь список записок, добавлять записку, редактировать ее и удалять.
+#
+# Реализовать консольное приложение заметки, с сохранением, чтением, добавлением,
+# редактированием и удалением заметок.
+#
+# Заметка должна содержать идентификатор, заголовок, тело заметки и дату/время
+# создания или последнего изменения заметки.
+#
+# Сохранение заметок необходимо сделать в формате json или csv формат
+# (разделение полей рекомендуется делать через точку с запятой).
+# Реализацию пользовательского интерфейса студент может делать как ему удобнее,
+# можно делать как параметры запуска программы (команда, данные),
+# можно делать как запрос команды с консоли и последующим вводом данных, как-то ещё,
+# на усмотрение студента.
 
-console.log("hello");
-/*
-Подумать над структурой класса Ноутбук для магазина техники - выделить поля и методы.
-Реализовать в java.
-    Создать множество ноутбуков.
-    Написать метод, который будет запрашивать у пользователя критерий (или критерии)
-    фильтрации и выведет ноутбуки, отвечающие фильтру. Критерии фильтрации можно хранить в Map.
-    Например:
-“Введите цифру, соответствующую необходимому критерию:
-    1 - ОЗУ
-2 - Объем ЖД
-3 - Операционная система
-4 - Цвет …
-Далее нужно запросить минимальные значения для указанных критериев -
- сохранить параметры фильтрации можно также в Map.
-    Отфильтровать ноутбуки из первоначального множества и вывести проходящие по условиям.
-    Работу сдать как обычно ссылкой на гит репозиторий
- */
+from datetime import datetime as dt
+import uuid
+import Controller.counter as counter
 
-import java.util.*;
-import java.util.stream.Collectors;
+class Note:
+    def __init__(self):
+        self.id = id
+        self.title = title
+        self.body = body
+        self.date = date
 
-class Laptop {
-    String brand;
-    int ram;
-    int hdd;
-    String os;
-    String color;
+    def get_id(note):
+        return note.id
 
-    public Laptop(String brand, int ram, int hdd, String os, String color) {
-    this.brand = brand;
-    this.ram = ram;
-    this.hdd = hdd;
-    this.os = os;
-    this.color = color;
-}
+    def get_title(note):
+        return note.title
 
-@Override
-public String toString() {
-    return "Laptop{" +
-        "brand='" + brand + '\'' +
-        ", ram=" + ram +
-        ", hdd=" + hdd +
-        ", os='" + os + '\'' +
-        ", color='" + color + '\'' +
-        '}';
-}
-}
+    def get_body(note):
+        return note.body
 
-public class Main {
-    public static void main(String[] args) {
-    Set<Laptop> laptops = new HashSet<>();
-    laptops.add(new Laptop("Dell", 16, 512, "Windows", "Black"));
-    laptops.add(new Laptop("Apple", 8, 256, "MacOS", "Silver"));
-    laptops.add(new Laptop("Lenovo", 32, 1024, "Windows", "Gray"));
+    def get_date(note):
+        return note.date
 
-    Map<String, Object> filters = new HashMap<>();
+    def set_id(note):
+        note.id = str(counter.counter())
 
-    Scanner scanner = new Scanner(System.in);
+    def set_title(note):
+        note.title = note
 
-    System.out.println("Выберите критерии для фильтрации:");
-    System.out.println("1 - ОЗУ");
-    System.out.println("2 - Объем ЖД");
-    System.out.println("3 - Операционная система");
-    System.out.println("4 - Цвет");
-    System.out.println("0 - Завершить выбор");
+    def set_body(note):
+        note.body = note
 
-    int choice;
-    while (true) {
-    choice = scanner.nextInt();
-    if (choice == 0) {
-    break;
-}
-switch (choice) {
-    case 1:
-        System.out.println("Минимальный объем ОЗУ?");
-        filters.put("ram", scanner.nextInt());
-        break;
-    case 2:
-        System.out.println("Минимальный объем ЖД?");
-        filters.put("hdd", scanner.nextInt());
-        break;
-    case 3:
-        System.out.println("Операционная система?");
-        filters.put("os", scanner.next());
-        break;
-    case 4:
-        System.out.println("Цвет?");
-        filters.put("color", scanner.next());
-        break;
-    default:
-        System.out.println("Неверный выбор. Попробуйте снова.");
-}
-}
+    def set_date(note):
+        note.date = str(datetime.now().strftime("%d.%m.%Y %H: %M:%S"))
 
-Set<Laptop> filteredLaptops = laptops.stream()
-    .filter(laptop -> filters.getOrDefault("ram", 0) instanceof Integer && laptop.ram >= (int) filters.getOrDefault("ram", 0))
-.filter(laptop -> filters.getOrDefault("hdd", 0) instanceof Integer && laptop.hdd >= (int) filters.getOrDefault("hdd", 0))
-.filter(laptop -> filters.getOrDefault("os", "").equals("") || laptop.os.equalsIgnoreCase((String) filters.getOrDefault("os", "")))
-.filter(laptop -> filters.getOrDefault("color", "").equals("") || laptop.color.equalsIgnoreCase((String) filters.getOrDefault("color", "")))
-.collect(Collectors.toSet());
+    def to_string(note):
+        return note.id + ';' + note.title + ';'+ note.body + ';' + note.date
 
-System.out.println("Отфильтрованные ноутбуки:");
-for (Laptop laptop : filteredLaptops) {
-    System.out.println(laptop);
-}
-}
-}
+    def map_note(note):
+        return'\nID: ' + note.id + '\n' + 'Название: ' + note.title + '\n' + '\n' + 'Описание: ' + note.body + '\n' + 'Дата публикации: '+ note.date
