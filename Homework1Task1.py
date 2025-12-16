@@ -1,16 +1,39 @@
-# This is a sample Python script.
+Задание 1: Язык математики
+В первый же день на сайте отвалилась формула по расчёту рекламной
+метрики, и только Вася может её поправить. Часть программы с вводными
+данными представлена ниже, отдельно записана формула на математическом
+языке.
+Дана программа:
+a = 8
+b = 10
+c = 12
+d = 18
+Продолжите программу: переведите выражение с математического языка на
+язык Python, запишите его в переменную res и выведите результат.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+a = 8
+b = 10
+c = 12
+d = 18
 
+# Вычисление числителя формулы
+#-Сначала вычисляем возведение a в квадрат
+#-Затем прибавляем -3
+#-Умножаем результат на b
+#-Вычисляем 2 в степени 3 и вычитаем его из предыдущего результата
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+dividend=((-3+a**2)*b-2**3)
 
+#Вычисление знаменателя формулы
+#-Умножаем 2 на d
+#-Вычисляем разность c и полученного результата
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+divider=(c-2*d)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+#Вычисление результата деления числителя на знаменатель
+
+res=dividend/divider
+
+#Вывод результата на экран
+
+print(res)
